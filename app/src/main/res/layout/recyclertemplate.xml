@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="5dp"
+    android:backgroundTint="#ffffff"
+    app:cardCornerRadius="15dp"
+    android:layout_margin="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:src="@drawable/schoolboy1"
+        android:id="@+id/iamgeId"/>
+
+
+
+    <LinearLayout
+        android:layout_width="249dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="40dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/nameid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:text="student Name"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"/>
+
+        <TextView
+            android:id="@+id/ageid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:text="student Age"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"/>
+
+        <TextView
+            android:id="@+id/genderid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:text="student Gender"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"/>
+
+        <TextView
+            android:id="@+id/dobid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:text="student DOB"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"/>
+
+        <TextView
+            android:id="@+id/classid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="10dp"
+            android:text="studentName"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"/>
+
+    </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

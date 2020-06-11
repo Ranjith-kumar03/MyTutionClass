@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Student Details">
+
+        <menu>
+
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/addStudent"
+                    android:icon="@drawable/addstudent"
+                    android:title="Add Student" />
+
+                <item
+                    android:id="@+id/updateStudent"
+                    android:icon="@drawable/updatestudent"
+                    android:title="Update Student" />
+
+                <item
+                    android:id="@+id/viewAllStudents"
+                    android:icon="@drawable/allstudents"
+                    android:title="View All Students" />
+            </group>
+        </menu>
+    </item>
+</menu>
