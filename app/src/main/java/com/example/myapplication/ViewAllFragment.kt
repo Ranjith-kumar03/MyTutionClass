@@ -1,32 +1,34 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.util.rangeTo
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.EventListener
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
+import kotlinx.android.synthetic.main.fragment_view_all.*
+import kotlinx.android.synthetic.main.fragment_view_all.view.*
+import kotlinx.android.synthetic.main.recyclertemplate.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class ViewAllFragment : Fragment(),onTouchListner {
+    val TAG="ViewAllFragment"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ViewAllFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ViewAllFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+    val myDB = FirebaseFirestore.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -34,7 +36,50 @@ class ViewAllFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_view_all, container, false)
+       val view:View = inflater.inflate(R.layout.fragment_view_all, container, false)
+        val progressBarView: ProgressBar =view.progressBarView
+
+        progressBarView.visibility = View.VISIBLE
+
+
+
+        return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+
+        super.onActivityCreated(savedInstanceState)
+        /*for(i in 0..100000000000000)
+        {
+            var sum=0L
+            sum +=i
+        }*/
+        var studentListRef:CollectionReference = myDB.collection("tution_students")
+        studentListRef.addSnapshotListener(EventListener<QuerySnapshot> { snapshots, e ->
+            if (e != null) {
+                Log.w(TAG, "listen:error", e)
+                Toast.makeText(activity, "Cannot Read", Toast.LENGTH_SHORT).show()
+
+                return@EventListener
+            }
+            val studentList = mutableListOf<Student>()
+           //
+            if (snapshots != null) {
+
+                for (doc in snapshots) {
+                    var student = doc.toObject(Student::class.java)
+                    student.id = doc.id
+                    studentList.add(student)
+                    recyclerview.adapter= StudentRecyclerAdapter(studentList, this )
+                    recyclerview.setHasFixedSize(true)
+                    recyclerview.layoutManager = LinearLayoutManager(activity)
+
+
+                }
+            }
+            progressBarView.visibility = View.GONE
+        })
+
     }
 
     companion object {
@@ -50,10 +95,22 @@ class ViewAllFragment : Fragment() {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             ViewAllFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+
+
             }
     }
+
+    override fun onClickListener(posistion: Int) {
+        Toast.makeText(activity, "Iam clickled short", Toast.LENGTH_SHORT).show()
+        val viewallFragment = ViewAllFragment::class.java.name
+        activity?.supportFragmentManager?.beginTransaction()?.addToBackStack(viewallFragment)?.replace(R.id.Container,UpdateFragment())?.commit()
+    }
+
+    override fun onLongClickListener(student: Student) {
+        Toast.makeText(activity, "Iam clickled Long", Toast.LENGTH_SHORT).show()
+        val viewallFragment = ViewAllFragment::class.java.name
+        activity?.supportFragmentManager?.beginTransaction()?.addToBackStack(viewallFragment)?.replace(R.id.Container,AddNotesFragment())?.commit()
+    }
 }
+
+

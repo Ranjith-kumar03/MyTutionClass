@@ -14,7 +14,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:orientation="vertical">
     <TextView
@@ -36,9 +35,11 @@
             app:hintTextColor="#070707"
             app:boxStrokeColor="#070707"
             android:hint="enter student name"
-            android:id="@+id/studentName"
+
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/studentName"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#070707"/>
@@ -52,9 +53,11 @@
             app:hintTextColor="#070707"
             app:boxStrokeColor="#070707"
             android:hint="enter student age"
-            android:id="@+id/studentAge"
+
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/studentAge"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#070707"/>
@@ -68,9 +71,10 @@
             app:hintTextColor="#070707"
             app:boxStrokeColor="#070707"
             android:hint="enter student gender"
-            android:id="@+id/studentGender"
+
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/studentGender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#070707"/>
@@ -84,9 +88,10 @@
             app:hintTextColor="#070707"
             app:boxStrokeColor="#070707"
             android:hint="enter student date of birth"
-            android:id="@+id/studentDOB"
+
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/studentDOB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#070707"/>
@@ -100,9 +105,10 @@
             app:hintTextColor="#070707"
             app:boxStrokeColor="#070707"
             android:hint="enter student class"
-            android:id="@+id/studentClass"
+
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/studentClass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#070707"/>
@@ -117,6 +123,12 @@
             android:text="Add Student"
             android:id="@+id/addStudent"
             android:textColor="#fff" />
+
+            <ProgressBar
+                android:id="@+id/progressBarAddStudent"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
     </LinearLayout>

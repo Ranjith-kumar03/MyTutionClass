@@ -10,14 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".reAuthenticate"
+            android:label="@string/title_activity_re_authenticate"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".MainActivity2"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".studentactivity"
             android:label="@string/title_activity_studentactivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".registerActivity"
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".loginactivity"
             android:label="@string/title_activity_loginactivity"

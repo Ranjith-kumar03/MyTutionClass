@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#FFFFFF"
-    tools:context=".AddFragment">
+    tools:context=".UpdateFragment"
+   >
     <ScrollView android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,9 +37,10 @@
         app:hintTextColor="#070707"
         app:boxStrokeColor="#070707"
         android:hint="enter student name"
-        android:id="@+id/studentName"
+
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/studentName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#070707"/>
@@ -52,9 +54,10 @@
         app:hintTextColor="#070707"
         app:boxStrokeColor="#070707"
         android:hint="enter student age"
-        android:id="@+id/studentAge"
+
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/studentAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#070707"/>
@@ -68,9 +71,10 @@
         app:hintTextColor="#070707"
         app:boxStrokeColor="#070707"
         android:hint="enter student gender"
-        android:id="@+id/studentGender"
+
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/studentGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#070707"/>
@@ -84,9 +88,10 @@
         app:hintTextColor="#070707"
         app:boxStrokeColor="#070707"
         android:hint="enter student date of birth"
-        android:id="@+id/studentDOB"
+
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/studentDOB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#070707"/>
@@ -100,9 +105,10 @@
         app:hintTextColor="#070707"
         app:boxStrokeColor="#070707"
         android:hint="enter student class"
-        android:id="@+id/studentClass"
+
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/studentClass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#070707"/>
@@ -114,9 +120,33 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:backgroundTint="@color/black"
-        android:text="Add Student"
+        android:text="Update Student"
         android:id="@+id/addStudent"
         android:textColor="#fff" />
+
+            <ProgressBar
+                android:id="@+id/progressBarUpdate"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="@color/black"
+                android:text="Get Student"
+                android:id="@+id/getStudent"
+                android:textColor="#fff" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="@color/black"
+                android:text="Student Notes"
+                android:id="@+id/AddNotes"
+                android:textColor="#fff" />
         </LinearLayout>
     </ScrollView>
 

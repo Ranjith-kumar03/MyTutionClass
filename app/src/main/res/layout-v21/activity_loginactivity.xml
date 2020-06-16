@@ -8,6 +8,16 @@
     android:background="#fff"
     android:padding="20dp"
     tools:context=".loginactivity">
+    <ScrollView android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
 
     <ImageView
         android:id="@+id/logo_image"
@@ -30,10 +40,7 @@
         android:layout_height="wrap_content"
         android:text="Sign In to continue"
         android:textSize="18sp"/>
-    <ScrollView android:id="@+id/scroll_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true" >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,9 +56,11 @@
             app:hintTextColor="#070707"
             app:boxStrokeColor="#070707"
             android:hint="enter username"
-            android:id="@+id/userName"
+
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/userName"
+                android:text="ranjithkumar03.1980@gmail.com"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#070707"/>
@@ -68,9 +77,11 @@
             app:passwordToggleTint="@color/black"
             android:hint="enter password"
 
-            android:id="@+id/password"
+
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password"
+                android:text="123456"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#070707"/>
@@ -109,8 +120,15 @@
             android:id="@+id/registerBtn"
             android:textColor="#fff" />
 
-    </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressBarlogin"
+            style="?android:attr/progressBarStyle"
+            android:theme="@style/ProgressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
+    </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 
 

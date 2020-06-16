@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1015237216726",
+    "firebase_url": "https://mytutionapp-a51e2.firebaseio.com",
+    "project_id": "mytutionapp-a51e2",
+    "storage_bucket": "mytutionapp-a51e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015237216726:android:3289e4c22fc9f7d0027c77",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1015237216726-opgvbnkkikip1mj48u5o8qbg10itjckg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsSZW3i6P1oMyDYKy4kgaP8t9noCVR6PE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1015237216726-opgvbnkkikip1mj48u5o8qbg10itjckg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

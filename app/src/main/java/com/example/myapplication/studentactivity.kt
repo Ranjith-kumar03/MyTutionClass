@@ -43,7 +43,7 @@ class studentactivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         var transaction: FragmentTransaction
         manager=this.getSupportFragmentManager();
         transaction=manager.beginTransaction();
-        transaction.add(R.id.Container, AddFragment()).commit();
+        transaction.add(R.id.Container, ViewAllFragment()).commit();
 
         }
 

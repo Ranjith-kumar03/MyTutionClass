@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff"
+    android:padding="20dp"
+   >
+    <TextView
+    android:id="@+id/logo_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Please Enter UserName for Password Reset"
+    android:textSize="20sp"
+    android:fontFamily="@font/aclonica"
+    android:textColor="#000"/>
+<TextView
+android:id="@+id/slogan_name"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Sign In to continue"
+android:textSize="18sp"/>
+
+
+<com.google.android.material.textfield.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:textColorHint="#070707"
+    app:hintTextColor="#070707"
+    app:boxStrokeColor="#070707"
+    android:hint="enter username"
+
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/userName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#070707"/>
+</com.google.android.material.textfield.TextInputLayout>
+
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:backgroundTint="@color/black"
+    android:text="GO"
+    android:id="@+id/submitBtn"
+    android:textColor="#fff" />
+
+
+</LinearLayout>
+
