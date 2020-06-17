@@ -65,7 +65,11 @@ class registerActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
-                            val user:FirebaseUser? = mAuth.currentUser
+                            // Sign in success, update UI with the signed-in user's information
+
+                            mAuth.currentUser?.updateEmail("ranjith.kumar03@gmail.com");
+                            var user:FirebaseUser? = mAuth.currentUser
+                            Toast.makeText(this, "Email address is ${user?.email}", Toast.LENGTH_SHORT).show()
                             user?.sendEmailVerification()
                                 ?.addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
