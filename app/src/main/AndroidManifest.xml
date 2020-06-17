@@ -9,14 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".reAuthenticate"
-            android:label="@string/title_activity_re_authenticate"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".MainActivity2"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".studentactivity"
             android:label="@string/title_activity_studentactivity"

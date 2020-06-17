@@ -10,13 +10,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
 
 class studentactivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
+    lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_studentactivity)
@@ -24,7 +25,7 @@ class studentactivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN)
         var toolbar: Toolbar
-        var drawerLayout: DrawerLayout
+
         var actionBarDrawerToggle: ActionBarDrawerToggle
         toolbar= findViewById(R.id.tool_bar)
         setSupportActionBar(toolbar);
@@ -32,6 +33,7 @@ class studentactivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
 
         drawerLayout=findViewById(R.id.drawer_layout);
+
         navigationView= findViewById<View>(R.id.navigationView) as NavigationView
         navigationView.setNavigationItemSelectedListener(this)
 
@@ -43,35 +45,29 @@ class studentactivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         var transaction: FragmentTransaction
         manager=this.getSupportFragmentManager();
         transaction=manager.beginTransaction();
-        transaction.add(R.id.Container, ViewAllFragment()).commit();
+        transaction.replace(R.id.Container, ViewAllFragment()).commit();
 
         }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        drawerLayout.closeDrawer(GravityCompat.START);
         when (item.itemId) {
             R.id.addStudent -> {
                 var manager: FragmentManager
                 var transaction: FragmentTransaction
                 manager=this.getSupportFragmentManager();
                 transaction=manager.beginTransaction();
-                transaction.add(R.id.Container, AddFragment()).commit();
-                Toast.makeText(this , "Add is sclicked", Toast.LENGTH_SHORT).show()
+                transaction.replace(R.id.Container, AddFragment()).commit();
+
         }
-            R.id.updateStudent -> {
-                var manager: FragmentManager
-                var transaction: FragmentTransaction
-                manager=this.getSupportFragmentManager();
-                transaction=manager.beginTransaction();
-                transaction.add(R.id.Container, UpdateFragment()).commit();
-                Toast.makeText(this , "Update is sclicked", Toast.LENGTH_SHORT).show()
-            }
+
             R.id.viewAllStudents -> {
                 var manager: FragmentManager
                 var transaction: FragmentTransaction
                 manager=this.getSupportFragmentManager();
                 transaction=manager.beginTransaction();
-                transaction.add(R.id.Container, ViewAllFragment()).commit();
-                Toast.makeText(this , "View all is sclicked", Toast.LENGTH_SHORT).show()
+                transaction.replace(R.id.Container, ViewAllFragment()).commit();
+
             }
             else ->{
 

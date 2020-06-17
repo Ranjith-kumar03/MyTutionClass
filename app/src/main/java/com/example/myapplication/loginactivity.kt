@@ -88,6 +88,7 @@ class loginactivity : AppCompatActivity() {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
+                            progressBarlogin.visibility = View.INVISIBLE
                             Toast.makeText(this, "Authentication failed.",Toast.LENGTH_SHORT).show()
                            // updateUI(null)
                             // ...

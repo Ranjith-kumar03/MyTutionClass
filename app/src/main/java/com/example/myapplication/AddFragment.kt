@@ -29,6 +29,7 @@ class AddFragment : Fragment() {
         // Inflate the layout for this fragment
       val view:View = inflater.inflate(R.layout.fragment_add, container, false)
        val studentName: TextInputEditText = view.findViewById(R.id.studentName)
+        
         val studentAge:TextInputEditText = view.findViewById(R.id.studentAge)
         val studentGender:TextInputEditText = view.findViewById(R.id.studentGender)
         val studentDOB:TextInputEditText= view.findViewById(R.id.studentDOB)
@@ -81,6 +82,7 @@ class AddFragment : Fragment() {
                 )).addOnCompleteListener(OnCompleteListener {
                     progressBarAddStudent.visibility = View.INVISIBLE
                     Toast.makeText(activity, "Student Added to Database", Toast.LENGTH_SHORT).show()
+                    activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.Container, ViewAllFragment())?.commit()
                 }).addOnFailureListener(OnFailureListener {
                     Toast.makeText(activity, "Experience Problem Try back later heheheh", Toast.LENGTH_SHORT).show()
                 })

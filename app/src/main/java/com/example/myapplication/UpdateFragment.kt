@@ -2,17 +2,22 @@ package com.example.myapplication
 
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
+import kotlinx.android.synthetic.main.fragment_add_notes.view.*
+import kotlinx.android.synthetic.main.fragment_update.*
 import java.text.DateFormat
 import java.text.Format
 import java.time.format.DateTimeFormatter
@@ -21,8 +26,11 @@ import java.util.logging.Formatter
 
 
 class UpdateFragment : Fragment() {
+    val TAG ="UpdateFragment"
     val myDB = FirebaseFirestore.getInstance()
-    lateinit var studentId: String
+
+    lateinit var  student:Student
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,96 +42,92 @@ class UpdateFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
+        var studentId:String =""
+        student= arguments?.getSerializable("student") as Student
         var view:View = inflater.inflate(R.layout.fragment_update, container, false)
         var studentName: TextInputEditText = view.findViewById(R.id.studentName)
+        studentName.setEnabled(false)
         var studentAge: TextInputEditText = view.findViewById(R.id.studentAge)
         var studentGender: TextInputEditText = view.findViewById(R.id.studentGender)
         var studentDOB: TextInputEditText = view.findViewById(R.id.studentDOB)
         var studentClass: TextInputEditText = view.findViewById(R.id.studentClass)
-        var addStudent: Button = view.findViewById(R.id.addStudent)
+        var updateStudent: Button = view.findViewById(R.id.updateStudent)
+        var logo_name: TextView = view.logo_name
+        logo_name.setText("Updating Details for ${student.studentName}")
         var progressBarUpdate: ProgressBar
         progressBarUpdate=view.findViewById(R.id.progressBarUpdate)
         progressBarUpdate.visibility = View.INVISIBLE
-        addStudent.setOnClickListener(View.OnClickListener {
+        myDB.collection("tution_students")
+            .whereEqualTo("studentName",student.studentName)
+            .get().addOnSuccessListener {
+                it.forEach {
+                    studentName.setText(student.studentName.toString())
+                    studentAge.setText(student.studentAge.toString())
+                    studentGender.setText(student.studentGender.toString())
+                    studentDOB.setText(student.studentDOB.toString())
+                    studentClass.setText(student.studentClass.toString())
+                }
+            }
+
+
+
+        return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        updateStudent.setOnClickListener(View.OnClickListener {
             progressBarUpdate.visibility = View.VISIBLE
-            /*if (studentName.editableText.trim().length == 0) {
+            if (studentName.editableText.trim().length == 0) {
                 studentName.setError("Please Enter Username")
                 studentName.requestFocus()
                 progressBarUpdate.visibility = View.INVISIBLE
-                Toast.makeText(activity, "Cant get Value", Toast.LENGTH_SHORT).show()
+
                 return@OnClickListener
             } else if(studentAge.editableText.trim().length == 0) {
                 studentAge.setError("Please Enter Username")
                 studentAge.requestFocus()
                 progressBarUpdate.visibility = View.INVISIBLE
-                Toast.makeText(activity, "Cant get Value", Toast.LENGTH_SHORT).show()
+
                 return@OnClickListener
             }else if(studentGender.editableText.trim().length == 0) {
                 studentGender.setError("Please Enter Username")
                 studentGender.requestFocus()
                 progressBarUpdate.visibility = View.INVISIBLE
-                Toast.makeText(activity, "Cant get Value", Toast.LENGTH_SHORT).show()
+
                 return@OnClickListener
             }else if(studentDOB.editableText.trim().length == 0) {
                 studentDOB.setError("Please Enter Username")
                 studentDOB.requestFocus()
                 progressBarUpdate.visibility = View.INVISIBLE
-                Toast.makeText(activity, "Cant get Value", Toast.LENGTH_SHORT).show()
+
                 return@OnClickListener
             }else if(studentClass.editableText.trim().length == 0) {
                 studentClass.setError("Please Enter Username")
                 studentClass.requestFocus()
                 progressBarUpdate.visibility = View.INVISIBLE
-                Toast.makeText(activity, "Cant get Value", Toast.LENGTH_SHORT).show()
+
                 return@OnClickListener
-            }else{*/
+            }else{
                 myDB.collection("tution_students")
-                    .orderBy("studentName")
+                    .whereEqualTo("studentName",student.studentName)
                     .get().addOnSuccessListener {
                         it.forEach {
-                            println(it.get("studentName"))
+                          var  studentId:String = it.id
+                            student.studentAge = studentAge.text.toString()
+                            student.studentGender = studentGender.text.toString()
+                            student.studentDOB = studentDOB.text.toString()
+                            student.studentClass = studentClass.text.toString()
+                            Log.d(TAG, "onCreateView: " +student)
+                            myDB.collection("tution_students").document(studentId).set(student, SetOptions.merge())
+                            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.Container, ViewAllFragment())?.commit()
+
                         }
                     }
-            //}
+
+
+            }
         })
-
-        var  getStudent: Button = view.findViewById(R.id.getStudent)
-        getStudent.setOnClickListener(View.OnClickListener {
-
-            myDB.collection("tution_students")
-                .whereEqualTo("studentName", studentName.editableText.toString())
-                .get().addOnSuccessListener {
-                    it.forEach {
-                        println(
-                            "Gravity of ${it.get("studentAge")} is ${it.get("studentGender")} m/s/s"
-                        )
-                        studentName.setText("${it.get("studentName")}")
-                        studentAge.setText("${it.get("studentAge")}")
-                        studentGender.setText("${it.get("studentGender")}")
-                        studentDOB.setText("${it.get("studentDOB")}")
-                        studentId=it.id
-
-
-                    }
-                }
-
-        })
-
-        var AddNotes: Button = view.findViewById(R.id.AddNotes)
-        AddNotes.setOnClickListener(View.OnClickListener {
-            Toast.makeText(activity, "Id of the selected student is "+studentId, Toast.LENGTH_SHORT).show()
-             var calendar:Calendar = Calendar.getInstance()
-            var time:String = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.time)
-           var notes= myDB.collection("tution_students").document(studentId).collection(studentId+"-sep-"+time.toString())
-            notes.add(mapOf(
-                "addedNotes" to studentClass.editableText.toString() + "Notes Added Time - "+time.toString()
-
-                //https://code.tutsplus.com/tutorials/getting-started-with-cloud-firestore-for-android--cms-30382
-            ))
-        })
-
-        return view
     }
 
     companion object {

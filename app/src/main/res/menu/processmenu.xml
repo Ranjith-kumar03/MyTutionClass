@@ -11,10 +11,6 @@
                     android:icon="@drawable/addstudent"
                     android:title="Add Student" />
 
-                <item
-                    android:id="@+id/updateStudent"
-                    android:icon="@drawable/updatestudent"
-                    android:title="Update Student" />
 
                 <item
                     android:id="@+id/viewAllStudents"

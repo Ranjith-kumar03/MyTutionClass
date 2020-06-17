@@ -14,6 +14,7 @@ import androidx.core.util.rangeTo
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
@@ -38,8 +39,34 @@ class ViewAllFragment : Fragment(),onTouchListner {
         // Inflate the layout for this fragment
        val view:View = inflater.inflate(R.layout.fragment_view_all, container, false)
         val progressBarView: ProgressBar =view.progressBarView
-
+        val recyclerview:RecyclerView  =view.recyclerview
         progressBarView.visibility = View.VISIBLE
+        var studentListRef:CollectionReference = myDB.collection("tution_students")
+        studentListRef.orderBy("studentName")
+            .addSnapshotListener(EventListener<QuerySnapshot> { snapshots, e ->
+                if (e != null) {
+                    Log.w(TAG, "listen:error", e)
+                    Toast.makeText(activity, "Cannot Read", Toast.LENGTH_SHORT).show()
+
+                    return@EventListener
+                }
+                val studentList = mutableListOf<Student>()
+                //
+                if (snapshots != null) {
+
+                    for (doc in snapshots) {
+                        var student = doc.toObject(Student::class.java)
+                        student.id = doc.id
+                        studentList.add(student)
+                        recyclerview.adapter= StudentRecyclerAdapter(studentList, this )
+                        recyclerview.setHasFixedSize(true)
+                        recyclerview.layoutManager = LinearLayoutManager(activity)
+
+
+                    }
+                }
+                progressBarView.visibility = View.GONE
+            })
 
 
 
@@ -54,31 +81,6 @@ class ViewAllFragment : Fragment(),onTouchListner {
             var sum=0L
             sum +=i
         }*/
-        var studentListRef:CollectionReference = myDB.collection("tution_students")
-        studentListRef.addSnapshotListener(EventListener<QuerySnapshot> { snapshots, e ->
-            if (e != null) {
-                Log.w(TAG, "listen:error", e)
-                Toast.makeText(activity, "Cannot Read", Toast.LENGTH_SHORT).show()
-
-                return@EventListener
-            }
-            val studentList = mutableListOf<Student>()
-           //
-            if (snapshots != null) {
-
-                for (doc in snapshots) {
-                    var student = doc.toObject(Student::class.java)
-                    student.id = doc.id
-                    studentList.add(student)
-                    recyclerview.adapter= StudentRecyclerAdapter(studentList, this )
-                    recyclerview.setHasFixedSize(true)
-                    recyclerview.layoutManager = LinearLayoutManager(activity)
-
-
-                }
-            }
-            progressBarView.visibility = View.GONE
-        })
 
     }
 
@@ -100,16 +102,26 @@ class ViewAllFragment : Fragment(),onTouchListner {
             }
     }
 
-    override fun onClickListener(posistion: Int) {
-        Toast.makeText(activity, "Iam clickled short", Toast.LENGTH_SHORT).show()
+    override fun onClickListener(student: Student) {
+       // Toast.makeText(activity, "Iam clickled short", Toast.LENGTH_SHORT).show()
         val viewallFragment = ViewAllFragment::class.java.name
-        activity?.supportFragmentManager?.beginTransaction()?.addToBackStack(viewallFragment)?.replace(R.id.Container,UpdateFragment())?.commit()
+        val updateFragment = UpdateFragment()
+        val addNotesFragment = AddNotesFragment()
+       var bundle:Bundle =Bundle()
+
+        bundle.putSerializable("student",student)
+        updateFragment.arguments=bundle
+        activity?.supportFragmentManager?.beginTransaction()?.addToBackStack(viewallFragment)?.replace(R.id.Container, updateFragment)?.commit()
     }
 
     override fun onLongClickListener(student: Student) {
-        Toast.makeText(activity, "Iam clickled Long", Toast.LENGTH_SHORT).show()
+        val addNotesFragment = AddNotesFragment()
+        var bundle:Bundle =Bundle()
+
+        bundle.putSerializable("student",student)
+        addNotesFragment.arguments=bundle
         val viewallFragment = ViewAllFragment::class.java.name
-        activity?.supportFragmentManager?.beginTransaction()?.addToBackStack(viewallFragment)?.replace(R.id.Container,AddNotesFragment())?.commit()
+        activity?.supportFragmentManager?.beginTransaction()?.addToBackStack(viewallFragment)?.replace(R.id.Container,addNotesFragment)?.commit()
     }
 }
 

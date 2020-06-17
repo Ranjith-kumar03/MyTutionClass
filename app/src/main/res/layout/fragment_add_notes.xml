@@ -6,36 +6,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#FFFFFF"
+    android:id="@+id/addNotesLayout"
     tools:context=".AddNotesFragment"
     >
-    <ScrollView android:id="@+id/scroll_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true" >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:orientation="vertical">
+
+
             <ProgressBar
-                android:id="@+id/progressBarUpdate"
+                android:id="@+id/progressBarNotes"
                 style="?android:attr/progressBarStyleHorizontal"
+                android:theme="@style/ProgressBarStyle"
                 android:indeterminate="true"
-                android:indeterminateTint="@color/black"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/logo_name"
                 android:layout_width="match_parent"
-                android:textSize="35sp"
+                android:textSize="15sp"
                 android:layout_height="wrap_content"
-                android:text="you are updating "
+                android:text="Please Add Notes "
 
                 android:background="#FFC107"
                 android:gravity="center"
                 android:fontFamily="@font/aclonica"
                 android:textColor="#000"/>
+
+            <ScrollView android:id="@+id/scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true" >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,10 +68,10 @@
                 android:text="Add Notes"
                 android:id="@+id/addNotes"
                 android:textColor="#fff" />
+                </LinearLayout>
+            </ScrollView>
 
 
 
-        </LinearLayout>
-    </ScrollView>
 
 </LinearLayout>

@@ -49,7 +49,8 @@ val TAG="StudentRecyclerAdapter"
 init {
     itemView.setOnLongClickListener(this)
     itemView.setOnClickListener(View.OnClickListener {
-        context.onClickListener(it?.getTag() as Int)
+        var student=students.get(it?.getTag() as Int)
+        context.onClickListener(student)
         Log.d(TAG, "onShortClick: "+(it?.getTag() as Int))
     })
 }
@@ -74,7 +75,7 @@ init {
 }
 interface onTouchListner{
 
-        fun onClickListener(posistion: Int)
+        fun onClickListener(student: Student)
         fun onLongClickListener(student: Student)
 
 }
